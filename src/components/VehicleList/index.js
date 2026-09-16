@@ -14,7 +14,6 @@ export default function VehicleList() {
     return <div data-testid="error">{ error }</div>;
   }
 
-
   return (
     <ul data-testid="results" className="vehicle-list">
 
