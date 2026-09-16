@@ -17,6 +17,10 @@ export default function VehicleList() {
   return (
     <div data-testid="results">
       <p>List of vehicles will be displayed here</p>
+
+      {vehicles.map((vehicle) => {
+        return (<div>{vehicle.id}</div>)
+      })}
       <p>
         Visit
         <a href="/api/vehicles.json" target="_blank"> /api/vehicles.json</a>
