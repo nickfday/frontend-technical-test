@@ -1,9 +1,9 @@
 import React from 'react';
 import useData from './useData';
 import './style.scss';
+import VehicleDetail from '../VehicleDetail';
 
 export default function VehicleList() {
-  // eslint-disable-next-line no-unused-vars
   const [loading, error, vehicles] = useData();
 
   if (loading) {
@@ -14,12 +14,18 @@ export default function VehicleList() {
     return <div data-testid="error">{ error }</div>;
   }
 
-  return (
-    <div data-testid="results">
-      <p>List of vehicles will be displayed here</p>
 
-      {vehicles.map((vehicle) => {
-        return (<div>{vehicle.id}</div>)
+  return (
+    <ul data-testid="results" className="vehicle-list">
+
+      {vehicles.map(({
+        id, apiUrl, description, media, price
+      }) => {
+        return (
+          <li className="vehicle-list__item" key={id}>
+            <VehicleDetail apiUrl={apiUrl} description={description} id={id} media={media} price={price} />
+          </li>
+        );
       })}
       <p>
         Visit
@@ -39,6 +45,6 @@ export default function VehicleList() {
         {' '}
         (vehicle without any price)
       </p>
-    </div>
+    </ul>
   );
 }

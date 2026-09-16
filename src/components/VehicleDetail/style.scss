@@ -1,0 +1,88 @@
+@import '../../variables.scss';
+
+.vehicle-detail {
+    display: flex;
+    gap: 20px;
+    border-top: 1px solid #F3F0F3;
+    min-height: 90px;
+
+    &__content {
+    flex: 1;
+    min-width: 0;
+    padding: 20px 0;
+    padding-right: 20px;
+}
+
+    &__media {
+        flex: 0 0 90px;
+          aspect-ratio: 1 / 1;
+          display: block;
+            overflow: hidden;
+
+
+    }
+
+    &__image {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+    }
+
+    &__title {
+    color: #101723;
+    font-size: 13px;
+    letter-spacing: 3px;
+    line-height: 1.1;
+    margin: 0 0 2px;
+    text-transform: uppercase;
+    }
+
+    &__price {
+    color: #4f535b;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 17px;
+    span {
+       display: inline-block;
+       letter-spacing: normal;
+       margin-left: 2px;
+    }
+  }
+
+    &__description {
+    color: #555a62;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin: 0;
+    }
+}
+
+@media (min-width: $breakpoint-tablet) {
+    .vehicle-detail {
+        flex-direction: column;
+    &__content {
+      align-items: center;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    &__media {
+            aspect-ratio: 16 / 9;
+               flex: none;
+    width: 100%;
+
+    }
+     &__title {
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        padding-top: 2px;
+     }
+
+    }
+
+
+
+}
