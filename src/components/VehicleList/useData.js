@@ -13,15 +13,23 @@ export default function useData() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    getData()
-      .then((response) => setVehicles(response))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
+    const controller = new AbortController();
+
+    getData(controller.signal)
+      .then(setVehicles)
+      .catch((requestError) => {
+        if (!controller.signal.aborted) {
+          setError(requestError.message);
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      });
+
+    return () => controller.abort();
   }, []);
 
-  return [
-    loading,
-    error,
-    vehicles,
-  ];
+  return [loading, error, vehicles];
 }
