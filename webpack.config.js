@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const breakpoints = require("./src/config/breakpoints.json");
 
 module.exports = {
     entry: {
@@ -27,7 +28,18 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: ["style-loader", "css-loader", "sass-loader"]
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            // Feed the JS/SCSS breakpoint config (src/config/breakpoints.json) into every
+                            // stylesheet as SCSS variables, so JS and SCSS share one source of truth.
+                            additionalData: `$breakpoint-tablet: ${breakpoints.tablet}px; $breakpoint-desktop: ${breakpoints.desktop}px;`
+                        }
+                    }
+                ]
             }
         ]
     },

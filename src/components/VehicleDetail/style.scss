@@ -1,0 +1,117 @@
+@use "../../variables" as *;
+
+.vehicle-detail {
+  display: flex;
+  min-height: 170px;
+
+  &__content {
+    border-top: 1px solid $color-border;
+    box-sizing: border-box;
+    flex: 1;
+    min-width: 0;
+    padding: 28px 20px 28px 38px;
+
+  }
+
+  &__media {
+    aspect-ratio: 1 / 1;
+    display: block;
+    flex: 0 0 180px;
+    overflow: hidden;
+  }
+
+  &__image {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  &__title {
+    color: $color-heading;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    line-height: 1.1;
+    margin: 0 0 2px;
+    text-transform: uppercase;
+  }
+
+  &__price {
+    color: $color-muted;
+    font-size: 23px;
+    letter-spacing: 3px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+  }
+
+  &__description {
+    -webkit-box-orient: vertical;
+    color: $color-body;
+    display: -webkit-box;
+    font-size: 21px;
+    letter-spacing: 1px;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    line-height: 1.3;
+    margin: 0;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+
+  .vehicle-detail {
+    flex-direction: column;
+
+    &__content {
+      align-items: center;
+      border-right: 1px solid $color-border;
+      border-top: 0;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      min-height: 222px;
+      padding: 48px 20px 20px;
+      text-align: center;
+    }
+
+    &__media {
+      aspect-ratio: 16 / 9;
+      flex: none;
+      width: 100%;
+    }
+
+    &__title {
+      border-bottom: 1px solid $color-heading;
+      border-top: 1px solid $color-heading;
+      margin-bottom: 20px;
+      padding: 2px 0;
+    }
+
+    &__description {
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-desktop) {
+
+  .vehicle-detail {
+
+    &__content {
+      min-height: 180px;
+      padding-top: 36px;
+    }
+
+    &__description {
+      -webkit-box-orient: initial;
+      display: block;
+      -webkit-line-clamp: initial;
+      line-clamp: initial;
+      overflow: visible;
+    }
+  }
+}

@@ -25,11 +25,62 @@ describe('<VehicleList /> Tests', () => {
   });
 
   it('Should show results if loading successfully finished', () => {
-    useData.mockReturnValue([false, false, 'results']);
-    const { queryByTestId } = render(<VehicleList />);
+    const vehicles = [
+      {
+        id: 'xf_k17',
+        apiUrl: '/api/vehicle_xf.json',
+        description: 'A luxury saloon',
+        price: '£350 per month',
+        media: [
+          { name: 'landscape', url: '/images/16x9/xf_k17.jpg' },
+          { name: 'square', url: '/images/1x1/xf_k17.jpg' },
+        ],
+      },
+      {
+        id: 'xe_k17',
+        apiUrl: '/api/vehicle_xe.json',
+        description: 'A compact executive saloon',
+        price: '£300 per month',
+        media: [
+          { name: 'landscape', url: '/images/16x9/xe_k17.jpg' },
+          { name: 'square', url: '/images/1x1/xe_k17.jpg' },
+        ],
+      },
+    ];
+    useData.mockReturnValue([false, false, vehicles]);
+    const { queryByTestId, getByText, getAllByRole } = render(<VehicleList />);
 
     expect(queryByTestId('loading')).toBeNull();
     expect(queryByTestId('error')).toBeNull();
     expect(queryByTestId('results')).not.toBeNull();
+    expect(getAllByRole('listitem')).toHaveLength(vehicles.length);
+    expect(getByText(vehicles[0].description)).not.toBeNull();
+  });
+
+  it('Should set a staggered index on each card for the fade in animation', () => {
+    const vehicles = [
+      {
+        id: 'xf_k17',
+        apiUrl: '/api/vehicle_xf.json',
+        description: 'A luxury saloon',
+        price: '£350 per month',
+        media: [],
+      },
+      {
+        id: 'xe_k17',
+        apiUrl: '/api/vehicle_xe.json',
+        description: 'A compact executive saloon',
+        price: '£300 per month',
+        media: [],
+      },
+    ];
+    useData.mockReturnValue([false, false, vehicles]);
+    const { getAllByRole } = render(<VehicleList />);
+
+    const items = getAllByRole('listitem');
+
+    items.forEach((item, index) => {
+      expect(item.style.getPropertyValue('--vehicle-index')).toEqual(String(index));
+    });
   });
 });
