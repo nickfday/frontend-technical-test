@@ -56,4 +56,31 @@ describe('<VehicleList /> Tests', () => {
     expect(getAllByRole('listitem')).toHaveLength(vehicles.length);
     expect(getByText(vehicles[0].description)).not.toBeNull();
   });
+
+  it('Should set a staggered index on each card for the fade in animation', () => {
+    const vehicles = [
+      {
+        id: 'xf_k17',
+        apiUrl: '/api/vehicle_xf.json',
+        description: 'A luxury saloon',
+        price: '£350 per month',
+        media: [],
+      },
+      {
+        id: 'xe_k17',
+        apiUrl: '/api/vehicle_xe.json',
+        description: 'A compact executive saloon',
+        price: '£300 per month',
+        media: [],
+      },
+    ];
+    useData.mockReturnValue([false, false, vehicles]);
+    const { getAllByRole } = render(<VehicleList />);
+
+    const items = getAllByRole('listitem');
+
+    items.forEach((item, index) => {
+      expect(item.style.getPropertyValue('--vehicle-index')).toEqual(String(index));
+    });
+  });
 });

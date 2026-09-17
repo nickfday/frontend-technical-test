@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import VehicleDetail from '..';
 
 describe('<VehicleDetail /> Tests', () => {
@@ -33,5 +33,16 @@ describe('<VehicleDetail /> Tests', () => {
     );
 
     expect(getByAltText('xf_k17')).not.toBeNull();
+  });
+
+  it('Should fall back to placeholder images when the image fails to load', () => {
+    const { container, getByAltText } = render(
+      <VehicleDetail id="xf_k17" description="A luxury saloon" price="£350 per month" media={media} />
+    );
+
+    fireEvent.error(getByAltText('xf_k17'));
+
+    expect(container.querySelector('img').src).toContain('/images/1x1/vehicle-placeholder-1x1.png');
+    expect(container.querySelector('source').srcset).toEqual('/images/16x9/vehicle-placeholder-16x9.png');
   });
 });
