@@ -13,7 +13,6 @@
     background-color: #fff;
     list-style: none;
     min-width: 0;
-
   }
 
   &__loading {
@@ -21,9 +20,7 @@
     display: flex;
     justify-content: center;
     min-height: 100vh;
-
   }
-
 }
 
 @keyframes vehicle-card-enter {
@@ -38,8 +35,6 @@
     transform: translateY(0);
   }
 }
-
-
 
 @media (min-width: $breakpoint-tablet) {
 
