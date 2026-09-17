@@ -7,6 +7,7 @@ const VEHICLES_API_URL = '/api/vehicles.json';
 /**
  * Pull vehicles information
  *
+ * @param {AbortSignal} [signal]
  * @return {Promise<Array.<VehicleSummaryPayload>>}
  */
 export default async function getData(signal) {

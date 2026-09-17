@@ -108,6 +108,10 @@
 
     &__description {
       -webkit-line-clamp: initial;
+      display: block;
+      overflow: visible;
+      -webkit-box-orient: initial;
+      -webkit-line-clamp: initial;
       line-clamp: initial;
     }
   }
