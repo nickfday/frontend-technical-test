@@ -1,2 +1,17 @@
-$breakpoint-tablet: 768px;
-$breakpoint-desktop: 1024px;
+// Breakpoints: $breakpoint-tablet / $breakpoint-desktop are injected globally by
+// webpack.config.js from src/config/breakpoints.json
+
+// Colors
+$color-heading: #101723;
+$color-body: #555a62;
+$color-muted: #4f535b;
+$color-border: #f3f0f3;
+
+// Typography
+$font-family-base:
+ 'Avenir Next',
+  Avenir,
+  'Helvetica Neue',
+  Helvetica,
+  Arial,
+  sans-serif;
