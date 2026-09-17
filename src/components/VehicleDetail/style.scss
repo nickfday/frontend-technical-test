@@ -107,12 +107,12 @@
     }
 
     &__description {
-      -webkit-line-clamp: initial;
-      display: block;
-      overflow: visible;
       -webkit-box-orient: initial;
+      display: block;
+      -webkit-line-clamp: initial;
       -webkit-line-clamp: initial;
       line-clamp: initial;
+      overflow: visible;
     }
   }
 }
