@@ -8,13 +8,14 @@ export default function VehicleList() {
 
   if (loading) {
     return (
-      <div data-testid="loading" role="status" aria-live="polite">
+      <div data-testid="loading" role="status" aria-live="polite" className="vehicle-list__loading">
         <img
           src="/images/tube-spinner.svg"
           alt=""
           aria-hidden="true"
           width="48"
           height="48"
+          className="vehicle-list__spinner"
         />
         <span className="visually-hidden">Loading vehicles</span>
       </div>
@@ -33,9 +34,15 @@ export default function VehicleList() {
     <>
       <h1 className="visually-hidden">Vehicles</h1>
       <ul data-testid="results" className="vehicle-list">
-        {vehicles.map(({ id, apiUrl, description, media, price }) => {
+        {vehicles.map(({
+          id, apiUrl, description, media, price
+        }, index) => {
           return (
-            <li className="vehicle-list__item" key={id}>
+            <li
+              className="vehicle-list__item"
+              key={id}
+              style={{ '--vehicle-index': index }}
+            >
               <VehicleDetail
                 apiUrl={apiUrl}
                 description={description}

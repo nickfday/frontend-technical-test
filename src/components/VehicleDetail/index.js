@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import breakpoints from '../../config/breakpoints.json';
 import './style.scss';
 
-export default function VehicleDetail({ id, description, media, price }) {
+export default function VehicleDetail({
+  id, description, media, price
+}) {
   const [imageError, setImageError] = useState(false);
 
   // Check url path name to determine correct image to render
@@ -10,15 +12,14 @@ export default function VehicleDetail({ id, description, media, price }) {
   const squareImage = media.find(({ url }) => url.includes('/1x1/'));
   const altText = id; // Vehicle ID deliberatly used as alt text. Reason: more descriptive than API media name response
 
-  const squareSrc =
-    !imageError && squareImage
-      ? squareImage.url
-      : '/images/1x1/vehicle-placeholder-1x1.png';
+  // Image fallback
+  const squareSrc = !imageError && squareImage
+    ? squareImage.url
+    : '/images/1x1/vehicle-placeholder-1x1.png';
 
-  const landscapeSrc =
-    !imageError && landscapeImage
-      ? landscapeImage.url
-      : '/images/16x9/vehicle-placeholder-16x9.png';
+  const landscapeSrc = !imageError && landscapeImage
+    ? landscapeImage.url
+    : '/images/16x9/vehicle-placeholder-16x9.png';
 
   return (
     <article className="vehicle-detail">
