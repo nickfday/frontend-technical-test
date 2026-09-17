@@ -3,14 +3,14 @@ import breakpoints from '../../config/breakpoints.json';
 import './style.scss';
 
 export default function VehicleDetail({
-  id, description, media, price
+  id, description, media = [], price
 }) {
   const [imageError, setImageError] = useState(false);
 
   // Check url path name to determine correct image to render
   const landscapeImage = media.find(({ url }) => url.includes('/16x9/'));
   const squareImage = media.find(({ url }) => url.includes('/1x1/'));
-  const altText = id; // Vehicle ID deliberatly used as alt text. Reason: more descriptive than API media name response
+  const altText = id; // Vehicle ID deliberately used as alt text. Reason: more descriptive than API media name response
 
   // Image fallback
   const squareSrc = !imageError && squareImage
@@ -42,6 +42,7 @@ export default function VehicleDetail({
         <h2 className="vehicle-detail__title">{id}</h2>
         <p className="vehicle-detail__price">
           From
+          {' '}
           <span>{price}</span>
         </p>
         <p className="vehicle-detail__description">{description}</p>

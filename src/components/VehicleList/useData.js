@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react';
 import getData from '../../api';
 
 /**
- * @returns {[boolean, Error|null, VehicleSummaryPayload[]]}
+ * @returns {[boolean, string|null, VehicleSummaryPayload[]]}
  */
 export default function useData() {
   /** @type {[VehicleSummaryPayload[], Function]} */
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();

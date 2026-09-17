@@ -9,17 +9,22 @@ const VEHICLES_API_URL = '/api/vehicles.json';
  *
  * @return {Promise<Array.<VehicleSummaryPayload>>}
  */
-// TODO: All API related logic should be made inside this function.
-export default async function getData() {
-  const vehiclesList = await request(VEHICLES_API_URL);
+export default async function getData(signal) {
+  const makeRequest = signal
+    ? (url) => request(url, { signal })
+    : request;
+
+  const vehiclesList = await makeRequest(VEHICLES_API_URL);
 
   const vehicleDetails = await Promise.all(
     vehiclesList.map(async (vehicle) => {
       try {
-        const details = await request(vehicle.apiUrl);
+        const details = await makeRequest(vehicle.apiUrl);
+
         if (!details.price) {
           return null;
         }
+
         return {
           ...vehicle,
           ...details,
@@ -30,5 +35,5 @@ export default async function getData() {
     }),
   );
 
-  return vehicleDetails.filter((vehicle) => vehicle !== null);
+  return vehicleDetails.filter(Boolean);
 }
